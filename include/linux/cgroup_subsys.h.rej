@@ -1,0 +1,12 @@
+--- include/linux/cgroup_subsys.h
++++ include/linux/cgroup_subsys.h
+@@ -72,3 +72,9 @@
+ #endif
+ 
+ /* */
++
++#ifdef CONFIG_CGROUP_BFQIO
++SUBSYS(bfqio)
++#endif
++
++/* */
