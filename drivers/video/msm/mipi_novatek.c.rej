@@ -1,0 +1,11 @@
+--- drivers/video/msm/mipi_novatek.c
++++ drivers/video/msm/mipi_novatek.c
+@@ -1768,7 +1768,7 @@
+ 				struct device_attribute *attr,
+ 				char *buf)
+ {
+-	return snprintf((char *)buf, sizeof(buf), "%u\n", barrier_mode);
++	return snprintf((char *)buf, sizeof(*buf), "%u\n", barrier_mode);
+ }
+ 
+ static ssize_t mipi_dsi_3d_barrier_write(struct device *dev,

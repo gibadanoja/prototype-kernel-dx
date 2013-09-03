@@ -152,6 +152,17 @@ config CPU_FREQ_DEFAULT_GOV_INTERACTIVE
 	  loading your cpufreq low-level hardware driver, using the
 	  'interactive' governor for latency-sensitive workloads.
 
+config CPU_FREQ_DEFAULT_GOV_HOTPLUG
+	bool "hotplug"
+	select CPU_FREQ_GOV_HOTPLUG
+	select CPU_FREQ_GOV_PERFORMANCE
+	help
+	  Use the CPUFreq governor 'hotplug' as default. This allows you
+	  to get a full dynamic frequency capable system with CPU
+	  hotplug support by simply loading your cpufreq low-level
+	  hardware driver.  Be aware that not all cpufreq drivers
+	  support the hotplug governor.
+
 config CPU_FREQ_DEFAULT_GOV_KTOONSERVATIVE
 	bool "ktoonservative"
 	select CPU_FREQ_GOV_KTOONSERVATIVE
@@ -188,6 +199,21 @@ config CPU_FREQ_GOV_ONDEMANDX
 	  For details, take a look at linux/Documentation/cpu-freq.
 
 	  If in doubt, say N.
+
+config CPU_FREQ_GOV_HOTPLUG
+       tristate "'hotplug' cpufreq governor"
+       depends on CPU_FREQ && NO_HZ && HOTPLUG_CPU
+       help
+         'hotplug' - this driver mimics the frequency scaling behavior
+         in 'ondemand', but with several key differences.  First is
+         that frequency transitions use the CPUFreq table directly,
+         instead of incrementing in a percentage of the maximum
+         available frequency.  Second 'hotplug' will offline auxillary
+         CPUs when the system is idle, and online those CPUs once the
+         system becomes busy again.  This last feature is needed for
+         architectures which transition to low power states when only
+         the "master" CPU is online, or for thermally constrained
+         devices.
 
 config CPU_FREQ_GOV_PERFORMANCE
 	tristate "'performance' governor"

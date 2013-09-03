@@ -3,7 +3,7 @@
 #include <linux/proc_fs.h>
 #include <linux/seq_file.h>
 
-extern const struct seq_operations cpuinfo_op;
+extern const struct seq_operations cpuinfo_op; //inode=proc fs
 static int cpuinfo_open(struct inode *inode, struct file *file)
 {
 	return seq_open(file, &cpuinfo_op);

@@ -48,7 +48,7 @@
 #define DBS_UI_SAMPLING_TIMEOUT			(80)
 
 #define MIN_SAMPLING_RATE_RATIO			(2)
-
+static DEFINE_PER_CPU(int, cpufreq_init_done);
 static unsigned int min_sampling_rate;
 
 #define LATENCY_MULTIPLIER			(1000)
